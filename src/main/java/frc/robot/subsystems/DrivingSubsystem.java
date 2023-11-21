@@ -51,7 +51,7 @@ public class DrivingSubsystem extends SubsystemBase{
     }
 
     public void drive(double xspeed, double zRotation) {
-        dfd.arcadeDrive(xspeed, zRotation);
+        dfd.arcadeDrive(zRotation, xspeed);
     }
 
     // public void turnRight() {
