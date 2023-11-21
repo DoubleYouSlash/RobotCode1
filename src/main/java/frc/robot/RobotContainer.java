@@ -37,8 +37,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     this.dss = new DrivingSubsystem(Constants.PortConstants.leftMotorPorts, Constants.PortConstants.rightMotorPorts);
     this.movmentStick = new Joystick(Constants.joysticksPorts.movment);
-    this.dss.setDefaultCommand(new MovmentCommand(dss, () -> (float)-
-    this.movmentStick.getY()));
+    this.dss.setDefaultCommand(new MovmentCommand(dss, () -> this.movmentStick.getY(), () -> this.movmentStick.getZ()));
     configureBindings();
     
   }

@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -9,6 +11,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DrivingSubsystem extends SubsystemBase{
     private CANSparkMax left1, left2, right1, right2;
+    private MotorControllerGroup leftcg, rightcg;
+
+    private DifferentialDrive dfd;
 
     public DrivingSubsystem(int[] left, int[] right) {
         this.left1 = new CANSparkMax(left[0], MotorType.kBrushless);
@@ -25,6 +30,10 @@ public class DrivingSubsystem extends SubsystemBase{
         this.left2.follow(left1);
         this.right2.follow(right1);
 
+        // leftcg = new MotorControllerGroup(left1, null);
+        // rightcg = new MotorControllerGroup(right1, null);
+
+        dfd = new DifferentialDrive(left1, right1);
     }
 
     // public void driveForward() {
@@ -41,9 +50,8 @@ public class DrivingSubsystem extends SubsystemBase{
         right2.set(0);
     }
 
-    public void drive(float speed) {
-        left1.set(speed);
-        right1.set(-speed);
+    public void drive(double xspeed, double zRotation) {
+        dfd.arcadeDrive(xspeed, zRotation);
     }
 
     // public void turnRight() {
